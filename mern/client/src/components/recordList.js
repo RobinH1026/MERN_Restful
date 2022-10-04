@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css"
 import Avatar from "./assets/images/me.jpg"
 import "./assets/css/style.css"
+import Covid from "../covid19/covid"
 
 export default function RecordList() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [avatar, setAvatar] = useState("");
+  const [edit, setEdit] = useState(false);
 
   useEffect(() => {
     async function getRecords() {
@@ -26,8 +28,15 @@ export default function RecordList() {
   }, []);
 
   const handleName= (event)=>{
-    console.log(event.target)
     setName(event.target.value);
+    setEdit(true);
+  }
+
+  const handleDescription =(event)=>{
+    setDescription(event.target.value);
+    setEdit(true);
+  }
+  const handleSave=()=>{
     const editedPerson = {
       name: name,
       description: description,
@@ -42,12 +51,9 @@ export default function RecordList() {
         },
       });
     }
-    updateRecords()
-  }
-
-  const handleDescription =(event)=>{
-    console.log(event.target.value);
-    setDescription(event.target.value);
+    updateRecords();
+    setEdit(false);
+    window.alert("Updated successfully!");
   }
   return (
     <div>
@@ -61,8 +67,12 @@ export default function RecordList() {
           </div>
           <textarea name="description" className="description mt-3 pl-4 pt-2 pr-3 pb-3" value={description} cols="90" rows="6" onChange={handleDescription}></textarea>
         </div>
+        {
+          edit?<button type="button" class="btn btn-success save_button" onClick={handleSave}>save</button>:
+          <button type="button" class="btn btn-danger save_button disabled_btn" disabled>save</button>
+        }
       </div>
-      
+      <Covid />
     </div>
   );
 }
