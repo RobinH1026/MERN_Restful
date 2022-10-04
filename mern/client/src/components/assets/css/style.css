@@ -1,0 +1,19 @@
+.avatar{
+    border-color: #2e528c;
+    border-radius: 7px;
+    height: 50px;
+    width: 25%;
+    font-size: 25px;
+    font-weight: bold;
+    padding-left: 12px;
+}
+.description{
+    border-color: #2e528c;
+    border-radius: 7px;
+}
+.logo{
+    background-color: #573d7c;
+    padding: 2px 13px;
+    border-radius: 7px;
+    cursor: pointer;
+}
